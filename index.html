@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RiftP20 — Riftbound PSA 10 Blue-Chip Index</title>
+  <title>RiftP20 — Riftbound PSA 10 Index</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,13 +35,17 @@
         </div>
         <div>
           <h1 class="text-xl font-bold text-slate-950">RiftP20</h1>
-          <p class="text-xs text-slate-500">Riftbound PSA 10 Blue-Chip Index</p>
+          <p class="text-xs text-slate-500" data-i18n="brand_subtitle">Riftbound PSA 10 Index</p>
         </div>
       </div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-3">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Live</span>
+        <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider" data-i18n="live">Live</span>
       </div>
+      <button id="langToggle" onclick="toggleLang()" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-[11px] font-medium text-slate-600 hover:bg-slate-100 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+        <span id="langLabel">中文</span>
+      </button>
     </header>
 
     <section class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4 fade-up-2">
@@ -49,7 +53,7 @@
         <div class="absolute inset-0 h-[3px]" style="background: linear-gradient(90deg, #2962FF, #1E88E5); opacity: 0; group-hover:opacity-100; transition-opacity;"></div>
         <div class="flex items-start justify-between">
           <div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Index Points</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500" data-i18n="index_points">Index Points</span>
             <p class="text-4xl font-bold text-slate-950 tnum mt-2" id="indexPoints">—</p>
             <p class="text-sm mt-2" id="indexChange">—</p>
           </div>
@@ -57,15 +61,15 @@
       </div>
 
       <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Performance</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500" data-i18n="performance">Performance</span>
         <div class="flex items-end gap-4 mt-4">
           <div class="flex-1 text-center">
             <p class="text-2xl font-bold text-slate-950 tnum" id="totalReturn">—</p>
-            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Total Return</p>
+            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="total_return">Total Return</p>
           </div>
           <div class="flex-1 text-center">
             <p class="text-2xl font-bold text-slate-950 tnum" id="latestDate">—</p>
-            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">As Of</p>
+            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="as_of">As Of</p>
           </div>
         </div>
       </div>
@@ -74,24 +78,128 @@
     <section class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 mt-6 fade-up-3">
       <div class="flex items-center justify-between mb-5">
         <div>
-          <h2 class="text-base font-bold text-slate-950">Index Performance</h2>
-          <p class="text-xs text-slate-500 mt-0.5">Daily closing index points · New York timezone</p>
+          <h2 class="text-base font-bold text-slate-950" data-i18n="index_performance">Index Performance</h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="index_performance_sub">Daily closing index points · New York timezone</p>
         </div>
         <span class="text-[11px] font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md" id="chartRange">—</span>
       </div>
       <div id="chart"></div>
     </section>
 
+    <section class="bg-white border border-slate-200 rounded-xl shadow-sm mt-6 overflow-hidden fade-up-3">
+      <div class="px-6 py-4 border-b border-slate-200">
+        <h2 class="text-base font-bold text-slate-950" data-i18n="constituents">Constituents</h2>
+        <p class="text-xs text-slate-500 mt-0.5" data-i18n="constituents_sub">20 Riftbound PSA 10 cards · Market cap weighted</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider border-b border-slate-200">
+              <th class="text-left font-semibold px-6 py-3">#</th>
+              <th class="text-left font-semibold px-6 py-3" data-i18n="card_id">Card ID</th>
+              <th class="text-left font-semibold px-6 py-3" data-i18n="name">Name</th>
+              <th class="text-right font-semibold px-6 py-3" data-i18n="latest_price">Latest Price</th>
+            </tr>
+          </thead>
+          <tbody id="constituentsTableBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+    </section>
+
     <footer class="mt-8 pt-6 border-t border-slate-200 text-xs text-slate-400 flex items-center justify-between flex-wrap gap-2">
-      <span>RiftP20 · Index performance data</span>
+      <span data-i18n="footer_left">RiftP20 · Index performance data</span>
       <span>Timezone: NY · stats at UTC+8 12:00</span>
     </footer>
   </div>
 
   <script>
+  const I18N = {
+    en: {
+      'lang_toggle': '中文',
+      'live': 'LIVE',
+      'brand_subtitle': 'Riftbound PSA 10 Index',
+      'index_points': 'Index Points',
+      'performance': 'Performance',
+      'total_return': 'Total Return',
+      'as_of': 'As Of',
+      'index_performance': 'Index Performance',
+      'index_performance_sub': 'Daily closing index points · New York timezone',
+      'constituents': 'Constituents',
+      'constituents_sub': '20 Riftbound PSA 10 cards · Market cap weighted',
+      'card_id': 'Card ID',
+      'name': 'Name',
+      'latest_price': 'Latest Price',
+      'footer_left': 'RiftP20 · Index performance data',
+      'base_day': 'Base day — index anchored at 1000.00'
+    },
+    zh: {
+      'lang_toggle': 'EN',
+      'live': '实时',
+      'brand_subtitle': 'Riftbound PSA 10 指数',
+      'index_points': '指数点数',
+      'performance': '表现',
+      'total_return': '总收益',
+      'as_of': '截至日期',
+      'index_performance': '指数表现',
+      'index_performance_sub': '每日收盘指数点数 · 纽约时区',
+      'constituents': '成分卡',
+      'constituents_sub': '20 张 Riftbound PSA 10 卡牌 · 市值加权',
+      'card_id': '卡牌编号',
+      'name': '名称',
+      'latest_price': '最新价格',
+      'footer_left': 'RiftP20 · 指数表现数据',
+      'base_day': '基准日 — 指数锚定 1000.00'
+    }
+  };
+  let currentLang = localStorage.getItem('riftLang') || 'en';
+  function t(key) { return (I18N[currentLang] && I18N[currentLang][key]) || (I18N.en[key]) || key; }
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const txt = t(key);
+      if (txt) el.textContent = txt;
+    });
+    const langLabel = document.getElementById('langLabel');
+    if (langLabel) langLabel.textContent = t('lang_toggle');
+    localStorage.setItem('riftLang', lang);
+  }
+  function toggleLang() {
+    applyLang(currentLang === 'en' ? 'zh' : 'en');
+    if (window.indexHistory) {
+      renderDashboard(window.indexHistory);
+      renderChart(window.indexHistory);
+    }
+  }
+  window.toggleLang = toggleLang;
+
   const EMBEDDED_INDEX_HISTORY = [
     { "date": "2026-07-07", "index_points": 1000.00 },
     { "date": "2026-07-08", "index_points": 1098.05 }
+  ];
+
+  const EMBEDDED_CONSTITUENTS = [
+    { "id": "SFD 227*/221", "name": "SFD SIGNATURE OVERNUMBER AHRI", "price": 9499.00 },
+    { "id": "OGN 197b/298", "name": "OGN NEXUS NIGHT PACK TEEMO", "price": 3499.99 },
+    { "id": "OGN 303*/298", "name": "OGN SIGNATURE OVERNUMBER AHRI", "price": 7900.00 },
+    { "id": "OGN 299*/298", "name": "OGN SIGNATURE OVERNUMBER KAI'SA", "price": 8600.00 },
+    { "id": "FND 196/298", "name": "NEW YEAR EVENT CARD PACK TEEMO", "price": 6421.00 },
+    { "id": "SFD 223*/221", "name": "SFD SIGNATURE OVERNUMBER VAYNE", "price": 3000.00 },
+    { "id": "SFD 225*/221", "name": "SFD SIGNATURE OVERNUMBER IRELIA", "price": 2699.99 },
+    { "id": "OGN 307*/298", "name": "OGN SIGNATURE OVERNUMBER TEEMO", "price": 2399.99 },
+    { "id": "OGN 263a/298", "name": "OGN WORLDS BUNDLE TEEMO", "price": 1949.99 },
+    { "id": "OGN 309*/298", "name": "OGN SIGNATURE OVERNUMBER MISS FORTUNE", "price": 2247.00 },
+    { "id": "OGN 301*/298", "name": "OGN SIGNATURE OVERNUMBER JINX", "price": 2499.99 },
+    { "id": "OGN 305*/298", "name": "OGN SIGNATURE OVERNUMBER YASUO", "price": 1699.00 },
+    { "id": "OGN 300*/298", "name": "OGN SIGNATURE OVERNUMBER VOLIBEAR", "price": 1500.00 },
+    { "id": "OGN 306*/298", "name": "OGN SIGNATURE OVERNUMBER LEONA", "price": 1300.00 },
+    { "id": "OGN 308*/298", "name": "OGN SIGNATURE OVERNUMBER VIKTOR", "price": 1599.00 },
+    { "id": "OGN 302*/298", "name": "OGN SIGNATURE OVERNUMBER DARIUS", "price": 1299.00 },
+    { "id": "SFD 239*/221", "name": "SFD SIGNATURE OVERNUMBER SORAKA", "price": 1299.00 },
+    { "id": "SFD 230*/221", "name": "SFD SIGNATURE OVERNUMBER TEEMO", "price": 1800.00 },
+    { "id": "UNL 238/219", "name": "UNL ULTIMATE RARE BARON NASHOR", "price": 4150.00 },
+    { "id": "OGN 304*/298", "name": "OGN SIGNATURE OVERNUMBER LEE SIN", "price": 2000.00 }
   ];
 
   async function loadIndexHistory() {
@@ -107,7 +215,7 @@
 
   const fmtDate = s => {
     const d = new Date(s + 'T00:00:00');
-    return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', timeZone: 'America/New_York' });
+    return d.toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-US', { month: 'short', day: '2-digit', timeZone: 'America/New_York' });
   };
 
   let chartInstance = null;
@@ -121,7 +229,7 @@
     document.getElementById('latestDate').textContent = fmtDate(last.date);
 
     if (n === 1) {
-      document.getElementById('indexChange').innerHTML = '<span class="text-slate-400">Base day — index anchored at 1000.00</span>';
+      document.getElementById('indexChange').innerHTML = '<span class="text-slate-400">' + t('base_day') + '</span>';
       document.getElementById('totalReturn').textContent = '0.00%';
     } else {
       const prev = indexHistory[n - 2];
@@ -186,10 +294,30 @@
     chartInstance.render();
   }
 
+  function renderConstituents() {
+    const tbody = document.getElementById('constituentsTableBody');
+    tbody.innerHTML = EMBEDDED_CONSTITUENTS.map((c, i) => {
+      return `
+      <tr class="hover:bg-slate-50 transition-colors">
+        <td class="px-6 py-3.5">
+          <span class="font-semibold text-slate-950 tnum">${i + 1}</span>
+        </td>
+        <td class="px-6 py-3.5">
+          <span class="font-semibold text-slate-950 tnum">${c.id}</span>
+        </td>
+        <td class="px-6 py-3.5 text-slate-700">${c.name}</td>
+        <td class="px-6 py-3.5 text-right tnum text-slate-950 font-semibold">$${c.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+      </tr>`;
+    }).join('');
+  }
+
   async function init() {
+    applyLang(currentLang);
     const indexHistory = await loadIndexHistory();
+    window.indexHistory = indexHistory;
     renderDashboard(indexHistory);
     renderChart(indexHistory);
+    renderConstituents();
   }
 
   init();
