@@ -66,12 +66,14 @@
         <span class="text-xs font-semibold uppercase tracking-wider text-slate-500" data-i18n="performance">Performance</span>
         <div class="flex items-end gap-4 mt-4">
           <div class="flex-1 text-center">
-            <p class="text-2xl font-bold text-slate-950 tnum" id="totalReturn">—</p>
-            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="total_return">Total Return</p>
+            <p class="text-sm font-semibold text-emerald-600" id="topGainerName">—</p>
+            <p class="text-xl font-bold text-emerald-600 tnum mt-1" id="topGainerPct">—</p>
+            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="top_gainer">Top Gainer</p>
           </div>
           <div class="flex-1 text-center">
-            <p class="text-2xl font-bold text-slate-950 tnum" id="latestDate">—</p>
-            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="as_of">As Of</p>
+            <p class="text-sm font-semibold text-rose-600" id="topLoserName">—</p>
+            <p class="text-xl font-bold text-rose-600 tnum mt-1" id="topLoserPct">—</p>
+            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="top_loser">Top Loser</p>
           </div>
         </div>
       </div>
@@ -122,8 +124,8 @@
       'brand_subtitle': 'Riftbound PSA 10 Index',
       'index_points': 'Index Points',
       'performance': 'Performance',
-      'total_return': 'Total Return',
-      'as_of': 'As Of',
+      'top_gainer': 'Top Gainer',
+      'top_loser': 'Top Loser',
       'index_performance': 'Index Performance',
       'index_performance_sub': 'Daily closing index points · New York timezone',
       'constituents': 'Constituents',
@@ -140,8 +142,8 @@
       'brand_subtitle': 'Riftbound PSA 10 指数',
       'index_points': '指数点数',
       'performance': '表现',
-      'total_return': '总收益',
-      'as_of': '截至日期',
+      'top_gainer': '最大涨幅',
+      'top_loser': '最大跌幅',
       'index_performance': '指数表现',
       'index_performance_sub': '每日收盘指数点数 · 纽约时区',
       'constituents': '成分卡',
@@ -170,7 +172,7 @@
   function toggleLang() {
     applyLang(currentLang === 'en' ? 'zh' : 'en');
     if (window.indexHistory) {
-      renderDashboard(window.indexHistory);
+      renderDashboard(window.indexHistory, window.priceHistory);
       renderChart(window.indexHistory);
     }
   }
@@ -180,6 +182,84 @@
     { "date": "2026-07-07", "index_points": 1000.00 },
     { "date": "2026-07-08", "index_points": 1110.02 },
     { "date": "2026-07-09", "index_points": 1075.09 }
+  ];
+
+  const EMBEDDED_PRICE_HISTORY = [
+    {
+      "date": "2026-07-07",
+      "prices": {
+        "SFD 227*/221": 8496.00,
+        "OGN 303*/298": 7799.99,
+        "OGN 197b/298": 3350.00,
+        "OGN 299*/298": 8250.00,
+        "FND 196/298": 6421.00,
+        "SFD 223*/221": 2500.00,
+        "SFD 225*/221": 2699.99,
+        "OGN 307*/298": 2399.99,
+        "OGN 263a/298": 1949.99,
+        "OGN 309*/298": 2247.00,
+        "OGN 301*/298": 2636.00,
+        "OGN 305*/298": 1699.00,
+        "OGN 300*/298": 1500.00,
+        "OGN 308*/298": 1299.99,
+        "OGN 302*/298": 1299.99,
+        "SFD 239*/221": 1099.00,
+        "SFD 230*/221": 1649.99,
+        "UNL 238/219": 4150.00,
+        "OGN 304*/298": 1633.00,
+        "SFD 195a/221": 499.99
+      }
+    },
+    {
+      "date": "2026-07-08",
+      "prices": {
+        "SFD 227*/221": 9499.00,
+        "OGN 303*/298": 7900.00,
+        "OGN 197b/298": 3499.99,
+        "OGN 299*/298": 8600.00,
+        "FND 196/298": 6421.00,
+        "SFD 223*/221": 3000.00,
+        "SFD 225*/221": 2699.99,
+        "OGN 307*/298": 2399.99,
+        "OGN 263a/298": 1949.99,
+        "OGN 309*/298": 2247.00,
+        "OGN 301*/298": 2499.99,
+        "OGN 305*/298": 1699.00,
+        "OGN 300*/298": 1500.00,
+        "OGN 308*/298": 1599.00,
+        "OGN 302*/298": 1299.00,
+        "SFD 239*/221": 1299.00,
+        "SFD 230*/221": 1800.00,
+        "UNL 238/219": 4150.00,
+        "OGN 304*/298": 2000.00,
+        "SFD 195a/221": 504.99
+      }
+    },
+    {
+      "date": "2026-07-09",
+      "prices": {
+        "SFD 227*/221": 6699.00,
+        "OGN 303*/298": 7900.00,
+        "OGN 197b/298": 4280.00,
+        "OGN 299*/298": 8600.00,
+        "FND 196/298": 6966.00,
+        "SFD 223*/221": 3000.00,
+        "SFD 225*/221": 3200.00,
+        "OGN 307*/298": 4150.00,
+        "OGN 263a/298": 1949.99,
+        "OGN 309*/298": 2247.00,
+        "OGN 301*/298": 2999.99,
+        "OGN 305*/298": 2175.00,
+        "OGN 300*/298": 1313.69,
+        "OGN 308*/298": 1699.00,
+        "OGN 302*/298": 1299.00,
+        "SFD 239*/221": 1299.00,
+        "SFD 230*/221": 1799.99,
+        "UNL 238/219": 4150.00,
+        "OGN 304*/298": 2100.00,
+        "SFD 195a/221": 504.99
+      }
+    }
   ];
 
   const EMBEDDED_CONSTITUENTS = [
@@ -216,6 +296,17 @@
     return EMBEDDED_INDEX_HISTORY;
   }
 
+  async function loadPriceHistory() {
+    try {
+      const res = await fetch('data.json', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        return data.price_history;
+      }
+    } catch (e) {}
+    return EMBEDDED_PRICE_HISTORY;
+  }
+
   const fmtDate = s => {
     const d = new Date(s + 'T00:00:00');
     return d.toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-US', { month: 'short', day: '2-digit', timeZone: 'America/New_York' });
@@ -223,30 +314,54 @@
 
   let chartInstance = null;
 
-  function renderDashboard(indexHistory) {
+  function renderDashboard(indexHistory, priceHistory) {
     const n = indexHistory.length;
     if (n === 0) return;
 
     const last = indexHistory[n - 1];
     document.getElementById('indexPoints').textContent = last.index_points.toFixed(2);
-    document.getElementById('latestDate').textContent = fmtDate(last.date);
 
     if (n === 1) {
       document.getElementById('indexChange').innerHTML = '<span class="text-slate-400">' + t('base_day') + '</span>';
-      document.getElementById('totalReturn').textContent = '0.00%';
+      document.getElementById('topGainerName').textContent = '—';
+      document.getElementById('topGainerPct').textContent = '—';
+      document.getElementById('topLoserName').textContent = '—';
+      document.getElementById('topLoserPct').textContent = '—';
     } else {
       const prev = indexHistory[n - 2];
-      const base = indexHistory[0];
       const dPoints = last.index_points - prev.index_points;
       const dPct = (dPoints / prev.index_points) * 100;
-      const totalReturn = ((last.index_points - base.index_points) / base.index_points) * 100;
 
       const sign = dPoints >= 0 ? '+' : '';
       const color = dPoints >= 0 ? 'text-emerald-600' : 'text-rose-600';
       document.getElementById('indexChange').innerHTML =
         `<span class="${color} font-semibold">${sign}${dPoints.toFixed(2)} (${sign}${dPct.toFixed(2)}%)</span>`;
-      document.getElementById('totalReturn').textContent =
-        (totalReturn >= 0 ? '+' : '') + totalReturn.toFixed(2) + '%';
+
+      if (priceHistory && priceHistory.length >= 2) {
+        const lastPrices = priceHistory[priceHistory.length - 1].prices;
+        const prevPrices = priceHistory[priceHistory.length - 2].prices;
+        let topGainer = { id: '', pct: -Infinity };
+        let topLoser = { id: '', pct: Infinity };
+
+        for (const id of Object.keys(lastPrices)) {
+          const lastP = lastPrices[id];
+          const prevP = prevPrices[id] || lastP;
+          if (prevP === 0) continue;
+          const pct = ((lastP - prevP) / prevP) * 100;
+          if (pct > topGainer.pct) topGainer = { id, pct };
+          if (pct < topLoser.pct) topLoser = { id, pct };
+        }
+
+        document.getElementById('topGainerName').textContent = topGainer.id;
+        document.getElementById('topGainerPct').textContent = '+' + topGainer.pct.toFixed(2) + '%';
+        document.getElementById('topLoserName').textContent = topLoser.id;
+        document.getElementById('topLoserPct').textContent = topLoser.pct.toFixed(2) + '%';
+      } else {
+        document.getElementById('topGainerName').textContent = '—';
+        document.getElementById('topGainerPct').textContent = '—';
+        document.getElementById('topLoserName').textContent = '—';
+        document.getElementById('topLoserPct').textContent = '—';
+      }
     }
   }
 
@@ -316,9 +431,10 @@
 
   async function init() {
     applyLang(currentLang);
-    const indexHistory = await loadIndexHistory();
+    const [indexHistory, priceHistory] = await Promise.all([loadIndexHistory(), loadPriceHistory()]);
     window.indexHistory = indexHistory;
-    renderDashboard(indexHistory);
+    window.priceHistory = priceHistory;
+    renderDashboard(indexHistory, priceHistory);
     renderChart(indexHistory);
     renderConstituents();
   }
