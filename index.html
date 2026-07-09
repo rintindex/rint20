@@ -1,445 +1,334 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RiftP20 — Riftbound PSA 10 Index</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
-    .apexcharts-tooltip { box-shadow: 0 4px 16px rgba(15, 23, 42, 0.10) !important; border-radius: 8px !important; border: 1px solid #e2e8f0 !important; background: #ffffff !important; }
-    .apexcharts-tooltip-title { background: #f8fafc !important; border-bottom: 1px solid #e2e8f0 !important; font-weight: 600 !important; }
-    .apexcharts-xaxistooltip { display: none !important; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .fade-up { animation: fadeUp .5s ease-out both; }
-    .fade-up-2 { animation: fadeUp .5s ease-out .1s both; }
-    .fade-up-3 { animation: fadeUp .5s ease-out .2s both; }
-    ::-webkit-scrollbar { height: 8px; width: 8px; }
-    ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
-  </style>
+  <title>RINT 20 / Rift Mint Index — Public Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1"></script>
+  <style id="rint20-styles">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.\!container{width:100%!important}.container{width:100%}@media (min-width:640px){.\!container{max-width:640px!important}.container{max-width:640px}}@media (min-width:768px){.\!container{max-width:768px!important}.container{max-width:768px}}@media (min-width:1024px){.\!container{max-width:1024px!important}.container{max-width:1024px}}@media (min-width:1280px){.\!container{max-width:1280px!important}.container{max-width:1280px}}@media (min-width:1536px){.\!container{max-width:1536px!important}.container{max-width:1536px}}.pointer-events-none{pointer-events:none}.sticky{position:sticky}.top-0{top:0}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.ml-1\.5{margin-left:.375rem}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-12{margin-top:3rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-1\.5{height:.375rem}.h-\[3px\]{height:3px}.h-\[6px\]{height:6px}.h-full{height:100%}.w-1\.5{width:.375rem}.w-full{width:100%}.min-w-0{min-width:0}.max-w-5xl{max-width:64rem}.max-w-7xl{max-width:80rem}.max-w-\[1400px\]{max-width:1400px}.flex-1{flex:1 1 0%}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;-moz-user-select:none;user-select:none}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.gap-0\.5{gap:.125rem}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.truncate{overflow:hidden;text-overflow:ellipsis}.truncate,.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:.25rem}.rounded-full{border-radius:9999px}.rounded-sm{border-radius:.125rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-t{border-top-width:1px}.border-blue-100{--tw-border-opacity:1;border-color:rgb(219 234 254/var(--tw-border-opacity,1))}.border-emerald-100{--tw-border-opacity:1;border-color:rgb(209 250 229/var(--tw-border-opacity,1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249/var(--tw-border-opacity,1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240/var(--tw-border-opacity,1))}.border-slate-950{--tw-border-opacity:1;border-color:rgb(2 6 23/var(--tw-border-opacity,1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255/var(--tw-bg-opacity,1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245/var(--tw-bg-opacity,1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))}.bg-rose-50{--tw-bg-opacity:1;background-color:rgb(255 241 242/var(--tw-bg-opacity,1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249/var(--tw-bg-opacity,1))}.bg-slate-400{--tw-bg-opacity:1;background-color:rgb(148 163 184/var(--tw-bg-opacity,1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.p-1{padding:.25rem}.p-6{padding:1.5rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-4{padding-bottom:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}.text-\[13px\]{font-size:13px}.text-\[32px\]{font-size:32px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235/var(--tw-text-opacity,1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216/var(--tw-text-opacity,1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175/var(--tw-text-opacity,1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105/var(--tw-text-opacity,1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87/var(--tw-text-opacity,1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72/var(--tw-text-opacity,1))}.text-rose-700{--tw-text-opacity:1;color:rgb(190 18 60/var(--tw-text-opacity,1))}.text-royal-blue{--tw-text-opacity:1;color:rgb(30 64 175/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105/var(--tw-text-opacity,1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85/var(--tw-text-opacity,1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23/var(--tw-text-opacity,1))}.opacity-40{opacity:.4}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}:root{--color-slate-black:#0f172a;--color-royal-blue:#1e40af;--color-slate-muted:#64748b;--color-slate-border:#e2e8f0;--color-bg-cool-gray:#f8fafc;--color-bg-pure-white:#fff;--color-trend-down:#dc2626;--color-trend-up:#16a34a}html{font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}body{background-color:var(--color-bg-cool-gray);color:var(--color-slate-black)}.tnum{font-variant-numeric:tabular-nums}.apexcharts-tooltip{box-shadow:0 4px 16px rgba(15,23,42,.1)!important;border-radius:8px!important;border:1px solid #e2e8f0!important;background:#fff!important}.apexcharts-tooltip-title{background:#f8fafc!important;border-bottom:1px solid #e2e8f0!important;font-weight:600!important}.apexcharts-xaxistooltip{display:none!important}@keyframes fadeUp{0%{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}.fade-up{animation:fadeUp .5s ease-out both}.fade-up-2{animation:fadeUp .5s ease-out .08s both}.fade-up-3{animation:fadeUp .5s ease-out .16s both}.fade-up-4{animation:fadeUp .5s ease-out .24s both}::-webkit-scrollbar{height:8px;width:8px}::-webkit-scrollbar-thumb{background:#e2e8f0;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#cbd5e1}:focus-visible{outline:2px solid var(--color-royal-blue);outline-offset:2px;border-radius:4px}.hover\:border-slate-300:hover{--tw-border-opacity:1;border-color:rgb(203 213 225/var(--tw-border-opacity,1))}.hover\:bg-slate-100:hover{--tw-bg-opacity:1;background-color:rgb(241 245 249/var(--tw-bg-opacity,1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252/var(--tw-bg-opacity,1))}.hover\:text-slate-600:hover{--tw-text-opacity:1;color:rgb(71 85 105/var(--tw-text-opacity,1))}.hover\:text-slate-700:hover{--tw-text-opacity:1;color:rgb(51 65 85/var(--tw-text-opacity,1))}.hover\:shadow-md:hover{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}@media (min-width:768px){.md\:inline{display:inline}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}</style>
 </head>
-<body class="bg-slate-50 text-slate-950 antialiased">
-  <div class="h-[3px] w-full" style="background: linear-gradient(90deg, #2962FF 0%, #1E88E5 100%);"></div>
-
-  <div class="max-w-5xl mx-auto px-6 py-8">
-    <header class="flex items-center justify-between pb-6 border-b border-slate-200 fade-up">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-          <span class="text-white font-bold text-lg">P20</span>
+<body class="bg-slate-50">
+  <div id="app">
+    
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 fade-up">
+      <div class="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+        <a href="index.html" class="brand-logo inline-flex items-baseline whitespace-nowrap select-none">
+          <span style="font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--color-slate-black);letter-spacing:0.02em;line-height:1">RINT</span>
+          <span style="font-family:'Inter',sans-serif;font-size:26px;font-weight:400;color:var(--color-royal-blue);letter-spacing:-0.02em;line-height:1;margin-left:8px">20</span>
+          <span style="font-family:'Inter',sans-serif;font-size:8.5px;font-weight:500;color:var(--color-slate-muted);letter-spacing:0.12em;text-transform:uppercase;line-height:1;margin-left:14px" data-i18n="brand_subtitle">
+            / Rift Mint Index
+          </span>
+        </a>
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="text-[11px] text-slate-400 font-medium tracking-wider uppercase hidden md:inline">
+         <span data-i18n="last_updated">Last Updated</span>: <span data-i18n="daily_close">Daily Close</span>
+       </span>
+       <span class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-50 border border-slate-200">
+         <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+         <span class="text-[11px] font-semibold text-slate-500" data-i18n="settled">SETTLED</span>
+       </span>
+          
+          <button id="langToggle"
+                  class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-[11px] font-semibold text-slate-600 hover:bg-slate-100 transition-colors">
+            中文
+          </button>
         </div>
-        <div>
-          <h1 class="text-xl font-bold text-slate-950">RiftP20</h1>
-          <p class="text-xs text-slate-500" data-i18n="brand_subtitle">Riftbound PSA 10 Index</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-4">
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider" data-i18n="live">Live</span>
-        </div>
-        <button id="langToggle" onclick="toggleLang()" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-[11px] font-medium text-slate-600 hover:bg-slate-100 transition-colors">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
-          <span id="langLabel">中文</span>
-        </button>
       </div>
     </header>
+    <main class="max-w-[1400px] mx-auto px-6 py-6 space-y-6">
 
-    <section class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4 fade-up-2">
-      <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 relative overflow-hidden group">
-        <div class="absolute inset-0 h-[3px]" style="background: linear-gradient(90deg, #2962FF, #1E88E5); opacity: 0; group-hover:opacity-100; transition-opacity;"></div>
-        <div class="flex items-start justify-between">
-          <div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500" data-i18n="index_points">Index Points</span>
-            <p class="text-4xl font-bold text-slate-950 tnum mt-2" id="indexPoints">—</p>
-            <p class="text-sm mt-2" id="indexChange">—</p>
-          </div>
+      <!-- Index Points -->
+      <div class="bg-white border border-slate-200 rounded shadow-sm p-6 fade-up-2" style="border-top:3px solid var(--color-royal-blue)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500" data-i18n="index_points">Index Points</span>
+          <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-sm tracking-wider" style="background-color:#eff6ff;color:var(--color-royal-blue)" data-i18n="base_1000">BASE 1000</span>
+        </div>
+        <p class="text-[32px] leading-tight font-bold text-slate-950 tnum" style="letter-spacing:-0.02em">1,428.22<span class="text-sm font-semibold text-slate-400 ml-1.5" data-i18n="pts">Pts</span></p>
+        <div class="mt-3 flex items-baseline gap-2 flex-wrap">
+          <span class="text-[13px] font-semibold text-emerald-600">▲ +116.80 (+8.91%)</span>
+          <span class="text-[11px] text-slate-400 font-medium tracking-wider uppercase" data-i18n="vs_prev_close">vs prev close</span>
         </div>
       </div>
 
-      <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500" data-i18n="performance">Performance</span>
-        <div class="flex items-end gap-4 mt-4">
-          <div class="flex-1 text-center">
-            <p class="text-sm font-semibold text-emerald-600" id="topGainerName">—</p>
-            <p class="text-xl font-bold text-emerald-600 tnum mt-1" id="topGainerPct">—</p>
-            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="top_gainer">Top Gainer</p>
-          </div>
-          <div class="flex-1 text-center">
-            <p class="text-sm font-semibold text-rose-600" id="topLoserName">—</p>
-            <p class="text-xl font-bold text-rose-600 tnum mt-1" id="topLoserPct">—</p>
-            <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider" data-i18n="top_loser">Top Loser</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 mt-6 fade-up-3">
-      <div class="flex items-center justify-between mb-5">
+      <!-- 指数图表 -->
+      
+    <section class="bg-white border border-slate-200 rounded p-6 fade-up-3">
+      <div class="flex items-center justify-between gap-4 pb-4 mb-4 border-b border-slate-100 flex-wrap">
         <div>
-          <h2 class="text-base font-bold text-slate-950" data-i18n="index_performance">Index Performance</h2>
-          <p class="text-xs text-slate-500 mt-0.5" data-i18n="index_performance_sub">Daily closing index points · New York timezone</p>
+          <h2 class="text-base font-bold tracking-wide text-slate-950" style="font-family:'Cinzel',serif;letter-spacing:0.05em" data-i18n="index_performance">Index Performance</h2>
+          <p class="text-[11px] text-slate-400 font-medium mt-1" data-i18n="chart_sub_index">Daily close · base anchored at 1000.00 · dashed line marks the base</p>
         </div>
-        <span class="text-[11px] font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md" id="chartRange">—</span>
+        <div class="flex items-center gap-2">
+          
+          <div id="timeRange" class="flex items-center gap-0.5 p-1 rounded bg-slate-100 border border-slate-200">
+        <button class="time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all text-slate-500 hover:text-slate-700" data-range="1W">1W</button><button class="time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all text-slate-500 hover:text-slate-700" data-range="2W">2W</button><button class="time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all text-slate-500 hover:text-slate-700" data-range="1M">1M</button><button class="time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all text-slate-500 hover:text-slate-700" data-range="3M">3M</button><button class="time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all text-slate-500 hover:text-slate-700" data-range="6M">6M</button><button class="time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all text-slate-500 hover:text-slate-700" data-range="1Y">1Y</button><button class="time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all bg-white text-royal-blue shadow-sm" data-range="MAX">MAX</button>
+       </div>
+          
+        </div>
       </div>
-      <div id="chart"></div>
+      <div id="chart-container" style="height:350px"></div>
     </section>
 
-    <section class="bg-white border border-slate-200 rounded-xl shadow-sm mt-6 overflow-hidden fade-up-3">
-      <div class="px-6 py-4 border-b border-slate-200">
-        <h2 class="text-base font-bold text-slate-950" data-i18n="constituents">Constituents</h2>
-        <p class="text-xs text-slate-500 mt-0.5" data-i18n="constituents_sub">20 Riftbound PSA 10 cards · Market cap weighted</p>
+      <!-- 成分卡名单 -->
+      <section class="bg-white border border-slate-200 rounded fade-up-4">
+        <div class="flex items-center justify-between gap-4 px-6 py-4 border-b border-slate-100 flex-wrap">
+          <div>
+            <h2 class="text-base font-bold tracking-wide text-slate-950" style="font-family:'Cinzel',serif;letter-spacing:0.05em" data-i18n="constituent_cards">Constituent Cards</h2>
+            <p class="text-[11px] text-slate-400 font-medium mt-1" data-i18n="latest_closing_price">Latest Closing Price</p>
+          </div>
+          <span class="text-[10px] font-bold px-2.5 py-1 rounded bg-slate-100 text-slate-500 tracking-wider" data-i18n="constituents_n">20 CONSTITUENTS</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead class="bg-slate-50">
+              <tr class="border-b-2 border-slate-950">
+                <th class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-4 py-3 text-left" style="width:48px">#</th>
+                <th class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-4 py-3 text-left" style="width:160px" data-i18n="card_id">Card ID</th>
+                <th class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-4 py-3 text-left" data-i18n="name">Name</th>
+                <th class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-4 py-3 text-right" data-i18n="latest_price">Latest Price</th>
+              </tr>
+            </thead>
+            <tbody>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">01</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">SFD 227*/221</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">SFD SIGNATURE OVERNUMBER AHRI</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$9,499.00</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">02</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 197b/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN NEXUS NIGHT PACK TEEMO</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$3,999.99</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +19.40%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">03</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 303*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER AHRI</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$7,824.99</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">04</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 299*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER KAI'SA</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$8,600.00</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">05</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">FND 196/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">NEW YEAR EVENT CARD PACK TEEMO</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$6,421.00</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">06</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 307*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER TEEMO</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$4,150.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +72.92%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">07</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 309*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER MISS FORTUNE</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$4,050.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +68.75%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">08</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">SFD 223*/221</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">SFD SIGNATURE OVERNUMBER VAYNE</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$3,000.00</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">09</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">SFD 225*/221</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">SFD SIGNATURE OVERNUMBER IRELIA</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$3,200.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +18.52%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">10</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 301*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER JINX</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$2,749.99</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">11</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 066/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN LAUNCH EXCLUSIVE AHRI</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$750.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +38.12%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">12</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 263a/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN WORLDS BUNDLE TEEMO</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$1,949.99</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">13</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 303/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN OVERNUMBER AHRI</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$1,000.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +14.29%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">14</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 304*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER LEE SIN</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$2,099.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +2.39%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">15</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">SFD 227/221</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">SFD OVERNUMBER AHRI</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$1,150.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +30.68%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">16</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">SFD 230*/221</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">SFD SIGNATURE OVERNUMBER TEEMO</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$1,800.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +5.88%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">17</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">SFD 195a/221 P</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">SFD CS LUNAR REVEL BUNDLE IRELIA</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$501.65</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">18</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 305*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER YASUO</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$1,699.00</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">19</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">OGN 308*/298</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">OGN SIGNATURE OVERNUMBER VIKTOR</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$1,699.00</span>
+            <span class="text-[11px] font-medium"><span class="text-emerald-600">▲ +6.25%</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3.5 text-slate-400 font-semibold tnum" style="font-family:'Cinzel',serif">20</td>
+        <td class="px-4 py-3.5 font-semibold text-slate-950 tnum">SFD 239*/221</td>
+        <td class="px-4 py-3.5 text-slate-500 text-[12px] font-medium">SFD SIGNATURE OVERNUMBER SORAKA</td>
+        <td class="px-4 py-3.5 text-right">
+          <div class="flex flex-col items-end gap-0.5">
+            <span class="font-semibold text-slate-950 tnum">$1,299.00</span>
+            <span class="text-[11px] text-slate-400 font-medium">0.00%</span>
+          </div>
+        </td>
+      </tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    
+    <footer class="border-t border-slate-200 bg-white mt-12">
+      <div class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between gap-4 flex-wrap">
+        <span class="text-[11px] text-slate-500 font-medium tracking-wider" data-i18n="footer_left">RINT 20 · Dashboard · data from local CSV</span>
+        <span class="text-[11px] text-slate-400 font-medium tracking-wider" data-i18n="footer_right">Divisor locked · market-cap weighted · timezone: UTC · stats at UTC+8 12:00</span>
       </div>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider border-b border-slate-200">
-              <th class="text-left font-semibold px-6 py-3">#</th>
-              <th class="text-left font-semibold px-6 py-3" data-i18n="card_id">Card ID</th>
-              <th class="text-left font-semibold px-6 py-3" data-i18n="name">Name</th>
-              <th class="text-right font-semibold px-6 py-3" data-i18n="latest_price">Latest Price</th>
-            </tr>
-          </thead>
-          <tbody id="constituentsTableBody" class="divide-y divide-slate-100"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <footer class="mt-8 pt-6 border-t border-slate-200 text-xs text-slate-400 flex items-center justify-between flex-wrap gap-2">
-      <span data-i18n="footer_left">RiftP20 · Index performance data</span>
-      <span>Timezone: NY · stats at UTC+8 12:00</span>
     </footer>
   </div>
-
-  <script>
-  const I18N = {
-    en: {
-      'lang_toggle': '中文',
-      'live': 'LIVE',
-      'brand_subtitle': 'Riftbound PSA 10 Index',
-      'index_points': 'Index Points',
-      'performance': 'Performance',
-      'top_gainer': 'Top Gainer',
-      'top_loser': 'Top Loser',
-      'index_performance': 'Index Performance',
-      'index_performance_sub': 'Daily closing index points · New York timezone',
-      'constituents': 'Constituents',
-      'constituents_sub': '20 Riftbound PSA 10 cards · Market cap weighted',
-      'card_id': 'Card ID',
-      'name': 'Name',
-      'latest_price': 'Latest Price',
-      'footer_left': 'RiftP20 · Index performance data',
-      'base_day': 'Base day — index anchored at 1000.00'
-    },
-    zh: {
-      'lang_toggle': 'EN',
-      'live': '实时',
-      'brand_subtitle': 'Riftbound PSA 10 指数',
-      'index_points': '指数点数',
-      'performance': '表现',
-      'top_gainer': '最大涨幅',
-      'top_loser': '最大跌幅',
-      'index_performance': '指数表现',
-      'index_performance_sub': '每日收盘指数点数 · 纽约时区',
-      'constituents': '成分卡',
-      'constituents_sub': '20 张 Riftbound PSA 10 卡牌 · 市值加权',
-      'card_id': '卡牌编号',
-      'name': '名称',
-      'latest_price': '最新价格',
-      'footer_left': 'RiftP20 · 指数表现数据',
-      'base_day': '基准日 — 指数锚定 1000.00'
-    }
-  };
-  let currentLang = localStorage.getItem('riftLang') || 'en';
-  function t(key) { return (I18N[currentLang] && I18N[currentLang][key]) || (I18N.en[key]) || key; }
-  function applyLang(lang) {
-    currentLang = lang;
-    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      const txt = t(key);
-      if (txt) el.textContent = txt;
-    });
-    const langLabel = document.getElementById('langLabel');
-    if (langLabel) langLabel.textContent = t('lang_toggle');
-    localStorage.setItem('riftLang', lang);
-  }
-  function toggleLang() {
-    applyLang(currentLang === 'en' ? 'zh' : 'en');
-    if (window.indexHistory) {
-      renderDashboard(window.indexHistory, window.priceHistory);
-      renderChart(window.indexHistory);
-    }
-  }
-  window.toggleLang = toggleLang;
-
-  const EMBEDDED_INDEX_HISTORY = [
-    { "date": "2026-07-07", "index_points": 1000.00 },
-    { "date": "2026-07-08", "index_points": 1110.02 },
-    { "date": "2026-07-09", "index_points": 1075.09 }
-  ];
-
-  const EMBEDDED_PRICE_HISTORY = [
-    {
-      "date": "2026-07-07",
-      "prices": {
-        "SFD 227*/221": 8496.00,
-        "OGN 303*/298": 7799.99,
-        "OGN 197b/298": 3350.00,
-        "OGN 299*/298": 8250.00,
-        "FND 196/298": 6421.00,
-        "SFD 223*/221": 2500.00,
-        "SFD 225*/221": 2699.99,
-        "OGN 307*/298": 2399.99,
-        "OGN 263a/298": 1949.99,
-        "OGN 309*/298": 2247.00,
-        "OGN 301*/298": 2636.00,
-        "OGN 305*/298": 1699.00,
-        "OGN 300*/298": 1500.00,
-        "OGN 308*/298": 1299.99,
-        "OGN 302*/298": 1299.99,
-        "SFD 239*/221": 1099.00,
-        "SFD 230*/221": 1649.99,
-        "UNL 238/219": 4150.00,
-        "OGN 304*/298": 1633.00,
-        "SFD 195a/221": 499.99
-      }
-    },
-    {
-      "date": "2026-07-08",
-      "prices": {
-        "SFD 227*/221": 9499.00,
-        "OGN 303*/298": 7900.00,
-        "OGN 197b/298": 3499.99,
-        "OGN 299*/298": 8600.00,
-        "FND 196/298": 6421.00,
-        "SFD 223*/221": 3000.00,
-        "SFD 225*/221": 2699.99,
-        "OGN 307*/298": 2399.99,
-        "OGN 263a/298": 1949.99,
-        "OGN 309*/298": 2247.00,
-        "OGN 301*/298": 2499.99,
-        "OGN 305*/298": 1699.00,
-        "OGN 300*/298": 1500.00,
-        "OGN 308*/298": 1599.00,
-        "OGN 302*/298": 1299.00,
-        "SFD 239*/221": 1299.00,
-        "SFD 230*/221": 1800.00,
-        "UNL 238/219": 4150.00,
-        "OGN 304*/298": 2000.00,
-        "SFD 195a/221": 504.99
-      }
-    },
-    {
-      "date": "2026-07-09",
-      "prices": {
-        "SFD 227*/221": 6699.00,
-        "OGN 303*/298": 7900.00,
-        "OGN 197b/298": 4280.00,
-        "OGN 299*/298": 8600.00,
-        "FND 196/298": 6966.00,
-        "SFD 223*/221": 3000.00,
-        "SFD 225*/221": 3200.00,
-        "OGN 307*/298": 4150.00,
-        "OGN 263a/298": 1949.99,
-        "OGN 309*/298": 2247.00,
-        "OGN 301*/298": 2999.99,
-        "OGN 305*/298": 2175.00,
-        "OGN 300*/298": 1313.69,
-        "OGN 308*/298": 1699.00,
-        "OGN 302*/298": 1299.00,
-        "SFD 239*/221": 1299.00,
-        "SFD 230*/221": 1799.99,
-        "UNL 238/219": 4150.00,
-        "OGN 304*/298": 2100.00,
-        "SFD 195a/221": 504.99
-      }
-    }
-  ];
-
-  const EMBEDDED_CONSTITUENTS = [
-    { "id": "SFD 227*/221", "name": "SFD SIGNATURE OVERNUMBER AHRI", "price": 6699.00 },
-    { "id": "OGN 197b/298", "name": "OGN NEXUS NIGHT PACK TEEMO", "price": 4280.00 },
-    { "id": "OGN 303*/298", "name": "OGN SIGNATURE OVERNUMBER AHRI", "price": 7900.00 },
-    { "id": "OGN 299*/298", "name": "OGN SIGNATURE OVERNUMBER KAI'SA", "price": 8600.00 },
-    { "id": "FND 196/298", "name": "NEW YEAR EVENT CARD PACK TEEMO", "price": 6966.00 },
-    { "id": "SFD 223*/221", "name": "SFD SIGNATURE OVERNUMBER VAYNE", "price": 3000.00 },
-    { "id": "SFD 225*/221", "name": "SFD SIGNATURE OVERNUMBER IRELIA", "price": 3200.00 },
-    { "id": "OGN 307*/298", "name": "OGN SIGNATURE OVERNUMBER TEEMO", "price": 4150.00 },
-    { "id": "OGN 263a/298", "name": "OGN WORLDS BUNDLE TEEMO", "price": 1949.99 },
-    { "id": "OGN 309*/298", "name": "OGN SIGNATURE OVERNUMBER MISS FORTUNE", "price": 2247.00 },
-    { "id": "OGN 301*/298", "name": "OGN SIGNATURE OVERNUMBER JINX", "price": 2999.99 },
-    { "id": "OGN 305*/298", "name": "OGN SIGNATURE OVERNUMBER YASUO", "price": 2175.00 },
-    { "id": "OGN 300*/298", "name": "OGN SIGNATURE OVERNUMBER VOLIBEAR", "price": 1313.69 },
-    { "id": "OGN 308*/298", "name": "OGN SIGNATURE OVERNUMBER VIKTOR", "price": 1699.00 },
-    { "id": "OGN 302*/298", "name": "OGN SIGNATURE OVERNUMBER DARIUS", "price": 1299.00 },
-    { "id": "SFD 239*/221", "name": "SFD SIGNATURE OVERNUMBER SORAKA", "price": 1299.00 },
-    { "id": "SFD 230*/221", "name": "SFD SIGNATURE OVERNUMBER TEEMO", "price": 1799.99 },
-    { "id": "UNL 238/219", "name": "UNL ULTIMATE RARE BARON NASHOR", "price": 4150.00 },
-    { "id": "OGN 304*/298", "name": "OGN SIGNATURE OVERNUMBER LEE SIN", "price": 2100.00 },
-    { "id": "SFD 195a/221", "name": "SFD CS LUNAR REVEL BUNDLE IRELIA", "price": 504.99 }
-  ];
-
-  async function loadIndexHistory() {
-    try {
-      const res = await fetch('marketcap-history.json', { cache: 'no-store' });
-      if (res.ok) {
-        const data = await res.json();
-        return data.snapshots.map(s => ({ date: s.date, index_points: s.index_points }));
-      }
-    } catch (e) {}
-    return EMBEDDED_INDEX_HISTORY;
-  }
-
-  async function loadPriceHistory() {
-    try {
-      const res = await fetch('data.json', { cache: 'no-store' });
-      if (res.ok) {
-        const data = await res.json();
-        return data.price_history;
-      }
-    } catch (e) {}
-    return EMBEDDED_PRICE_HISTORY;
-  }
-
-  const fmtDate = s => {
-    const d = new Date(s + 'T00:00:00');
-    return d.toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-US', { month: 'short', day: '2-digit', timeZone: 'America/New_York' });
-  };
-
-  let chartInstance = null;
-
-  function renderDashboard(indexHistory, priceHistory) {
-    const n = indexHistory.length;
-    if (n === 0) return;
-
-    const last = indexHistory[n - 1];
-    document.getElementById('indexPoints').textContent = last.index_points.toFixed(2);
-
-    if (n === 1) {
-      document.getElementById('indexChange').innerHTML = '<span class="text-slate-400">' + t('base_day') + '</span>';
-      document.getElementById('topGainerName').textContent = '—';
-      document.getElementById('topGainerPct').textContent = '—';
-      document.getElementById('topLoserName').textContent = '—';
-      document.getElementById('topLoserPct').textContent = '—';
-    } else {
-      const prev = indexHistory[n - 2];
-      const dPoints = last.index_points - prev.index_points;
-      const dPct = (dPoints / prev.index_points) * 100;
-
-      const sign = dPoints >= 0 ? '+' : '';
-      const color = dPoints >= 0 ? 'text-emerald-600' : 'text-rose-600';
-      document.getElementById('indexChange').innerHTML =
-        `<span class="${color} font-semibold">${sign}${dPoints.toFixed(2)} (${sign}${dPct.toFixed(2)}%)</span>`;
-
-      if (priceHistory && priceHistory.length >= 2) {
-        const lastPrices = priceHistory[priceHistory.length - 1].prices;
-        const prevPrices = priceHistory[priceHistory.length - 2].prices;
-        let topGainer = { id: '', pct: -Infinity };
-        let topLoser = { id: '', pct: Infinity };
-
-        for (const id of Object.keys(lastPrices)) {
-          const lastP = lastPrices[id];
-          const prevP = prevPrices[id] || lastP;
-          if (prevP === 0) continue;
-          const pct = ((lastP - prevP) / prevP) * 100;
-          if (pct > topGainer.pct) topGainer = { id, pct };
-          if (pct < topLoser.pct) topLoser = { id, pct };
-        }
-
-        document.getElementById('topGainerName').textContent = topGainer.id;
-        document.getElementById('topGainerPct').textContent = '+' + topGainer.pct.toFixed(2) + '%';
-        document.getElementById('topLoserName').textContent = topLoser.id;
-        document.getElementById('topLoserPct').textContent = topLoser.pct.toFixed(2) + '%';
-      } else {
-        document.getElementById('topGainerName').textContent = '—';
-        document.getElementById('topGainerPct').textContent = '—';
-        document.getElementById('topLoserName').textContent = '—';
-        document.getElementById('topLoserPct').textContent = '—';
-      }
-    }
-  }
-
-  function renderChart(indexHistory) {
-    if (chartInstance) { try { chartInstance.destroy(); } catch (e) {} chartInstance = null; }
-
-    const n = indexHistory.length;
-    if (n === 0) {
-      document.getElementById('chart').innerHTML = '<div class="flex items-center justify-center h-[350px] text-sm text-slate-400">No data available</div>';
-      document.getElementById('chartRange').textContent = '—';
-      return;
-    }
-
-    document.getElementById('chartRange').textContent = n + 'D';
-    const categories = indexHistory.map(h => fmtDate(h.date));
-    const series = indexHistory.map(h => Number(h.index_points.toFixed(2)));
-    const isSingle = n === 1;
-
-    let yMin, yMax;
-    if (isSingle) {
-      const pad = indexHistory[0].index_points * 0.02;
-      yMin = indexHistory[0].index_points - pad;
-      yMax = indexHistory[0].index_points + pad;
-    } else {
-      const lo = Math.min(...series);
-      const hi = Math.max(...series);
-      const pad = Math.max(10, (hi - lo) * 0.15);
-      yMin = lo - pad;
-      yMax = hi + pad;
-    }
-
-    const options = {
-      chart: { type: 'area', height: 350, background: '#ffffff', fontFamily: 'Inter, inherit', toolbar: { show: false }, zoom: { enabled: false } },
-      series: [{ name: 'RiftP20', data: series }],
-      colors: ['#2962FF'],
-      fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.2, opacityTo: 0, stops: [0, 100], gradientToColors: ['#2962FF'] } },
-      stroke: { curve: 'smooth', width: 2.5, colors: ['#2962FF'] },
-      grid: { borderColor: '#F0F3FA', row: { colors: ['#ffffff'], opacity: 1 }, column: { colors: ['#ffffff'], opacity: 1 }, xaxis: { lines: { show: true } }, yaxis: { lines: { show: true } }, padding: { top: 0, right: 8, bottom: 0, left: 8 } },
-      xaxis: { categories: categories, labels: { style: { colors: '#94a3b8', fontSize: '11px', fontFamily: 'Inter, sans-serif' }, trim: false }, axisBorder: { color: '#F0F3FA' }, axisTicks: { show: false }, crosshairs: { show: true, stroke: { color: '#94a3b8', width: 1, dashArray: 3 } }, tooltip: { enabled: false } },
-      yaxis: { min: yMin, max: yMax, labels: { style: { colors: '#94a3b8', fontSize: '11px', fontFamily: 'Inter, sans-serif' } }, axisBorder: { show: false }, axisTicks: { show: false } },
-      tooltip: { enabled: true, theme: 'light', shared: true, intersect: false, style: { fontSize: '12px', fontFamily: 'Inter, sans-serif' }, y: { formatter: v => v.toFixed(2) } },
-      dataLabels: { enabled: false },
-      markers: { size: isSingle ? 7 : 0, colors: ['#2962FF'], strokeColors: ['#ffffff'], strokeWidth: 2 },
-      legend: { show: false }
-    };
-
-    chartInstance = new ApexCharts(document.querySelector('#chart'), options);
-    chartInstance.render();
-  }
-
-  function renderConstituents() {
-    const tbody = document.getElementById('constituentsTableBody');
-    tbody.innerHTML = EMBEDDED_CONSTITUENTS.map((c, i) => {
-      return `
-      <tr class="hover:bg-slate-50 transition-colors">
-        <td class="px-6 py-3.5">
-          <span class="font-semibold text-slate-950 tnum">${i + 1}</span>
-        </td>
-        <td class="px-6 py-3.5">
-          <span class="font-semibold text-slate-950 tnum">${c.id}</span>
-        </td>
-        <td class="px-6 py-3.5 text-slate-700">${c.name}</td>
-        <td class="px-6 py-3.5 text-right tnum text-slate-950 font-semibold">$${c.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-      </tr>`;
-    }).join('');
-  }
-
-  async function init() {
-    applyLang(currentLang);
-    const [indexHistory, priceHistory] = await Promise.all([loadIndexHistory(), loadPriceHistory()]);
-    window.indexHistory = indexHistory;
-    window.priceHistory = priceHistory;
-    renderDashboard(indexHistory, priceHistory);
-    renderChart(indexHistory);
-    renderConstituents();
-  }
-
-  init();
+  <script id="rint20-data" type="application/json">
+    {"indexHistory":[{"date":"2026-07-01","totalMarketCap":12007439.98,"indexPoints":1000},{"date":"2026-07-02","totalMarketCap":12535444.299999999,"indexPoints":1043.9730967533012},{"date":"2026-07-03","totalMarketCap":12634060.16,"indexPoints":1052.1859931045851},{"date":"2026-07-04","totalMarketCap":12679092.66,"indexPoints":1055.9363762066457},{"date":"2026-07-05","totalMarketCap":13257271.450000001,"indexPoints":1104.0880880588836},{"date":"2026-07-06","totalMarketCap":14581395.33,"indexPoints":1214.363374231915},{"date":"2026-07-07","totalMarketCap":15746740.840000002,"indexPoints":1311.4153280156559},{"date":"2026-07-08","totalMarketCap":17149222.92,"indexPoints":1428.216418201076}],"lang":"en"}
   </script>
+  <script>"use strict";(()=>{function f(a){let{height:o,yFormatter:e,singlePoint:s,yMin:i,yMax:l}=a;return{chart:{type:"area",height:o,background:"#ffffff",fontFamily:"Inter, ui-sans-serif, system-ui, sans-serif",animations:{enabled:!0,easing:"easeinout",speed:600,dynamicAnimation:{enabled:!1}},toolbar:{show:!1},zoom:{enabled:!1},sparkline:{enabled:!1}},colors:["#1e40af"],dataLabels:{enabled:!1},fill:{type:"gradient",gradient:{shadeIntensity:1,opacityFrom:.2,opacityTo:0,stops:[0,100]}},stroke:{curve:"straight",width:2.5},grid:{borderColor:"#F0F3FA",strokeDashArray:0,xaxis:{lines:{show:!0}},yaxis:{lines:{show:!0}},padding:{top:10,right:16,bottom:0,left:8}},xaxis:{type:"category",labels:{style:{colors:"#94a3b8",fontSize:"11px",fontFamily:"Inter"},trim:!0,hideOverlappingLabels:!0},axisBorder:{show:!1},axisTicks:{show:!1},tooltip:{enabled:!1}},yaxis:{min:i,max:l,labels:{style:{colors:"#94a3b8",fontSize:"11px",fontFamily:"Inter"},formatter:c=>e(c)}},tooltip:{theme:"light",shared:!0,intersect:!1,y:{formatter:c=>e(c)}},markers:{size:s?7:0,colors:["#1e40af"],strokeColors:"#ffffff",strokeWidth:2,hover:{size:6}},legend:{show:!1}}}function h(a,o){if(!a)return"";let[e,s,i]=a.split("-").map(c=>parseInt(c,10));if(!e||!s||!i)return a;let l=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return o==="zh"?`${s}\u6708${String(i).padStart(2,"0")}\u65E5`:`${l[s-1]} ${String(i).padStart(2,"0")}`}var g={brand_subtitle:"Rift Mint Index",live:"LIVE",lang_toggle:"\u4E2D\u6587",last_updated:"Last Updated",utc_time:"UTC Time",card_id:"Card ID",name:"Name",latest_price:"Latest Price",footer_left:"RINT 20 \xB7 Dashboard \xB7 data from local CSV",footer_right:"Divisor locked \xB7 market-cap weighted \xB7 timezone: UTC \xB7 stats at UTC+8 12:00",watchlist_link:"Watchlist",index_points:"Index Points",base_1000:"BASE 1000",pts:"Pts",total_market_cap:"Total Market Cap",cards_n:"20 CARDS",usd:"USD",base_date:"Base Date",locked_divisor:"Locked Divisor",constituents:"Constituents",total_psa10_pop:"Total PSA 10 Pop",watchlist:"Watchlist",index_performance:"Index Performance",mcap_performance:"Total Market Cap Performance",chart_sub_index:"Daily close \xB7 base anchored at 1000.00 \xB7 dashed line marks the base",chart_sub_mcap:"Daily close \xB7 base anchored at day-1 market cap \xB7 dashed line marks the base",constituent_cards:"Constituent Cards",table_sub:"Latest close \xB7 sorted by index weight (high \u2192 low)",holdings_n:"20 HOLDINGS",psa10_pop:"PSA 10 Pop",market_cap:"Market Cap",weight:"Weight",base_day_index:"Base day \xB7 index anchored at 1000.00",base_day_divisor:"Base day \xB7 divisor locked",vs_prev_close:"vs prev close",base_label_index:"Base 1000.00",days_time_frame:"D TIME FRAME",back_to_index:"Back to Index",current_constituents:"Current Constituents",watchlist_candidates:"Watchlist Candidates",total_pool:"Total Pool",would_enter:"Would Enter",rebalance_rule:"Rebalance Rule",rebalance_desc:"Merge current RINT 20 constituents with watchlist candidates, calculate market cap (price \xD7 PSA 10 pop) for each card, sort by cap descending, and select the top 20 as new RINT 20 constituents.",merged_ranking:"Merged Ranking",merged_sub:"All cards ranked by market cap \xB7 top 20 = new constituents",status:"Status",back:"Back to Index",series:"Series",card_status:"Status",price_history:"Price History",daily_changes:"Daily Changes",date:"Date",change:"Change",change_pct:"Change %",previous_card:"Previous",next_card:"Next",card_not_found:"Card not found",back_link:"Back to Index",constituent:"Constituent",candidate:"Candidate",performance:"Performance",top_gainer:"Top Gainer",top_loser:"Top Loser",index_performance_sub:"Daily closing index points \xB7 UTC timezone",constituents_sub:"20 Riftbound PSA 10 cards \xB7 Market cap weighted",base_day:"Base day \u2014 index anchored at 1000.00",status_const:"CONST",status_in:"IN",status_out:"OUT",status_watch:"WATCH",settled:"SETTLED",daily_close:"Daily Close",vs_prev_day:"vs prev day",assets_n:"20 ASSETS",constituents_n:"20 CONSTITUENTS",copies:"Copies",index_trend:"Index Trend",constituent_weights:"Constituent Weights",latest_closing_price:"Latest Closing Price",sorted_by_weight:"Sorted by weight descending"};var b={brand_subtitle:"Rift Mint Index",live:"\u5B9E\u65F6",lang_toggle:"EN",last_updated:"\u6700\u540E\u66F4\u65B0",utc_time:"UTC \u65F6\u95F4",card_id:"\u5361\u724C\u7F16\u53F7",name:"\u540D\u79F0",latest_price:"\u6700\u65B0\u4EF7\u683C",footer_left:"RINT 20 \xB7 \u4EEA\u8868\u76D8 \xB7 \u6570\u636E\u6765\u81EA\u672C\u5730 CSV",footer_right:"\u9664\u6570\u9501\u5B9A \xB7 \u5E02\u503C\u52A0\u6743 \xB7 \u65F6\u533A:UTC \xB7 \u7EDF\u8BA1\u65F6\u95F4:UTC+8 12:00",watchlist_link:"\u5019\u9009\u76D1\u6D4B",index_points:"\u6307\u6570\u70B9\u6570",base_1000:"\u57FA\u51C6 1000",pts:"\u70B9",total_market_cap:"\u603B\u5E02\u503C",cards_n:"20 \u5F20",usd:"USD",base_date:"\u57FA\u51C6\u65E5\u671F",locked_divisor:"\u9501\u5B9A\u9664\u6570",constituents:"\u6210\u5206\u5361\u6570",total_psa10_pop:"PSA 10 \u603B\u5B58\u91CF",watchlist:"\u5019\u9009\u76D1\u6D4B",index_performance:"\u6307\u6570\u8D70\u52BF",mcap_performance:"\u603B\u5E02\u503C\u8D70\u52BF",chart_sub_index:"\u6BCF\u65E5\u6536\u76D8 \xB7 \u57FA\u51C6\u951A\u5B9A 1000.00 \xB7 \u865A\u7EBF\u6807\u8BB0\u57FA\u51C6",chart_sub_mcap:"\u6BCF\u65E5\u6536\u76D8 \xB7 \u57FA\u51C6\u951A\u5B9A\u9996\u65E5\u603B\u5E02\u503C \xB7 \u865A\u7EBF\u6807\u8BB0\u57FA\u51C6",constituent_cards:"\u6210\u5206\u5361\u724C",table_sub:"\u6700\u65B0\u6536\u76D8 \xB7 \u6309\u6307\u6570\u6743\u91CD\u964D\u5E8F\u6392\u5217",holdings_n:"20 \u6301\u4ED3",psa10_pop:"PSA 10 \u5B58\u91CF",market_cap:"\u5E02\u503C",weight:"\u6743\u91CD",base_day_index:"\u57FA\u51C6\u65E5 \xB7 \u6307\u6570\u951A\u5B9A 1000.00",base_day_divisor:"\u57FA\u51C6\u65E5 \xB7 \u9664\u6570\u9501\u5B9A",vs_prev_close:"\u8F83\u524D\u6536\u76D8",base_label_index:"\u57FA\u51C6 1000.00",days_time_frame:"\u65E5 \u65F6\u95F4\u7A97\u53E3",back_to_index:"\u8FD4\u56DE\u4E3B\u9762\u677F",current_constituents:"\u5F53\u524D\u6210\u5206\u5361",watchlist_candidates:"\u5019\u9009\u5361\u6570\u91CF",total_pool:"\u5408\u5E76\u603B\u6570",would_enter:"\u5C06\u65B0\u8FDB",rebalance_rule:"\u8C03\u4ED3\u89C4\u5219",rebalance_desc:"\u5C06\u5F53\u524D RINT 20 \u6210\u5206\u5361\u4E0E\u5019\u9009\u5361\u5408\u5E76\uFF0C\u6309\u5E02\u503C\uFF08price \xD7 PSA 10 pop\uFF09\u964D\u5E8F\u6392\u5E8F\uFF0C\u9009\u53D6\u524D 20 \u540D\u4F5C\u4E3A\u65B0\u7684 RINT 20 \u6210\u5206\u5361\u3002",merged_ranking:"\u5408\u5E76\u6392\u540D",merged_sub:"\u5168\u90E8\u5361\u724C\u6309\u5E02\u503C\u964D\u5E8F \xB7 \u524D 20 \u540D\u4E3A\u65B0\u6210\u5206\u5361",status:"\u72B6\u6001",back:"\u8FD4\u56DE\u4E3B\u9762\u677F",series:"\u7CFB\u5217",card_status:"\u72B6\u6001",price_history:"\u4EF7\u683C\u5386\u53F2",daily_changes:"\u6BCF\u65E5\u53D8\u52A8",date:"\u65E5\u671F",change:"\u53D8\u52A8",change_pct:"\u53D8\u52A8 %",previous_card:"\u4E0A\u4E00\u5F20",next_card:"\u4E0B\u4E00\u5F20",card_not_found:"\u5361\u724C\u672A\u627E\u5230",back_link:"\u8FD4\u56DE\u4E3B\u9762\u677F",constituent:"\u6210\u5206\u5361",candidate:"\u5019\u9009\u5361",performance:"\u8868\u73B0\u699C",top_gainer:"\u6DA8\u5E45\u699C\u9996",top_loser:"\u8DCC\u5E45\u699C\u9996",index_performance_sub:"\u6BCF\u65E5\u6536\u76D8\u6307\u6570\u70B9\u6570 \xB7 UTC \u65F6\u533A",constituents_sub:"20 \u5F20 Riftbound PSA 10 \u5361\u724C \xB7 \u5E02\u503C\u52A0\u6743",base_day:"\u57FA\u51C6\u65E5 \u2014 \u6307\u6570\u951A\u5B9A 1000.00",status_const:"CONST",status_in:"IN",status_out:"OUT",status_watch:"WATCH",settled:"\u5DF2\u6536\u76D8",daily_close:"\u6BCF\u65E5\u6536\u76D8",vs_prev_day:"\u8F83\u524D\u65E5",assets_n:"20 \u8D44\u4EA7",constituents_n:"20 \u6210\u5206\u5361",copies:"\u5F20",index_trend:"\u6307\u6570\u8D70\u52BF",constituent_weights:"\u6210\u5206\u5361\u6743\u91CD",latest_closing_price:"\u6700\u65B0\u6536\u76D8\u4EF7",sorted_by_weight:"\u6309\u6743\u91CD\u964D\u5E8F\u6392\u5217"};function v(){return localStorage.getItem("riftLang")||"en"}function x(a,o){return(a==="zh"?b:g)[o]??g[o]??o}var I={"1W":7,"2W":14,"1M":30,"3M":90,"6M":180,"1Y":365,MAX:0};function y(){let a=document.getElementById("rint20-data");if(!a||!a.textContent)return;let o=JSON.parse(a.textContent),e=v(),s=null,i="MAX",l=(n,t)=>{let r=I[t]??0;return r<=0||n.length<=r?n:n.slice(n.length-r)},c=()=>{let n=document.getElementById("chart-container");if(!n)return;s&&s.destroy();let t=l(o.indexHistory,i),r=t.map(d=>d.indexPoints),m=Math.min(...r),p=Math.max(...r),u=p-m,k=u>0?m-u*.05:m-1,T=u>0?p+u*.05:p+1,w=[{name:x(e,"index_points"),data:t.map(d=>({x:h(d.date,e),y:Number(d.indexPoints.toFixed(2))}))}],D=f({lang:e,height:350,yFormatter:d=>d.toFixed(2),singlePoint:t.length===1,yMin:k,yMax:T});s=new ApexCharts(n,{series:w,...D}),s.render()},S=()=>{document.querySelectorAll(".time-range-btn").forEach(n=>{let t=n,r=t.dataset.range===i;t.className=`time-range-btn px-2.5 py-1 rounded text-[11px] font-semibold transition-all ${r?"bg-white text-royal-blue shadow-sm":"text-slate-500 hover:text-slate-700"}`})},C=n=>{document.querySelectorAll("[data-i18n]").forEach(t=>{let r=t.getAttribute("data-i18n");r&&(t.textContent=x(n,r))})},_=n=>{e=n,document.documentElement.lang=e==="zh"?"zh-CN":"en",localStorage.setItem("riftLang",e);let t=document.getElementById("langToggle");t&&(t.textContent=e==="en"?"\u4E2D\u6587":"EN"),C(e),c()};_(e),document.getElementById("langToggle")?.addEventListener("click",()=>{_(e==="en"?"zh":"en")}),document.querySelectorAll(".time-range-btn").forEach(n=>{n.addEventListener("click",()=>{let t=n.dataset.range;!t||t===i||(i=t,S(),c())})})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",y):y();})();
+</script>
 </body>
 </html>
